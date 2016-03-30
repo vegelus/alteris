@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+                            
+{% block body %}
+
+    <div class="span6">
+
+        <div class="box">
+
+            <div class="title">
+
+                <h4> 
+                    <span>Zmiana wartości</span>
+                </h4>
+
+            </div>
+            <div class="content">
+                
+                <form action="{{ path('category_update', { 'id': entity.id}) }}" method="post" {{ form_enctype(form) }}>
+                    {{ form_widget(form._token) }}
+                    <div class="form-row row-fluid">
+                        <div class="span12">
+                            <div class="row-fluid">
+                                {{ form_widget(form) }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button class="btn btn-info" type="submit">Zapisz</button>
+                        <a href="{{path('category')}}" class="btn" type="button">Anuluj</a>
+                    </div>
+
+
+                </form>
+
+            </div>
+
+        </div><!-- End .box -->
+
+    </div>
+
+{% endblock %}

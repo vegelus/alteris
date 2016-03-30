@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+
+{% block body %}
+<div class="row-fluid">
+<div class="span12">
+
+        <div class="box gradient">
+
+            <div class="title">
+
+                <h4>
+                    <span class="icon16  icomoon-icon-grid "></span>
+                    <span>Lista kategorii</span>
+                    <form class="box-form right" action="{{ path('category_new') }}">
+                        <button class="btn btn-mini" href="">
+                            <span class="icon16 entypo-icon-plus-2 black"></span>
+                            Dodaj
+                        </button>
+                    </form>
+                </h4>
+                <a class="minimize" href="#" style="display: none;">Minimize</a>
+            </div>
+            <div class="content noPad" style="display: block;">
+                <table class="table table-bordered " border="1">
+                    <thead>
+                        <tr>
+                            <th width="5%" >#</th>
+                            <th>Treść</th>
+                            <th width="50px"></th>
+                            
+                            <th width="50px">Akcje</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      {% for entity in entities %}
+                            <tr >
+                                <td>{{ entity.id }}</td>
+                                <td style="text-align: left">
+                                {% if entity.lvl > 0 %}
+                                    {% for i in 1 .. entity.lvl %}<span class="icon16  typ-icon-arrow-right-2">..</span>{%endfor%}
+                                {% endif %}
+                                {{ entity.title }}</td>
+                                
+                                <td>
+                                    
+                                    {% if entity.title != 'root' %}
+                                        {% if entity.checkIsFirst  %}<a class="tip" href="{{ path('category_moveup', { 'id': entity.id }) }}"><span class="icon16 icomoon-icon-arrow-up-6">Up</span></a>{% endif %}
+                                        {% if entity.checkIsLast  %}<a class="tip" href="{{ path('category_movedown', { 'id': entity.id }) }}" data-hasqtip="true" aria-describedby="qtip-7"><span class="icon16 icomoon-icon-arrow-down-6 "> Down</span></a>{% endif %}</td>
+                                    {% endif %}
+                                
+                                <td>
+                                    {% if entity.lvl > 0 %}
+                                    <div class="controls center">
+                                        <a class="tip" href="{{ path('category_edit', { 'id': entity.id }) }}" data-hasqtip="true" aria-describedby="qtip-7"><span class="icon12 icomoon-icon-pencil"> edit </span></a>
+                                        <a rel="nofollow" class="tip" href="{{ path('category_delete', { 'id': entity.id }) }}" onclick="return confirm('Czy na pewno chcesz usunąć?');" oldtitle="Remove task" title="" data-hasqtip="true" aria-describedby="qtip-8"><span class="icon12 icomoon-icon-remove"> delete </span></a>
+                                    </div>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                      {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+            </div><!-- End .box -->
+
+        </div>
+    </div>
+    {% endblock %}

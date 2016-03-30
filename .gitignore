@@ -12,3 +12,5 @@
 /composer.phar
 cache
 /app/logs
+/nbproject/private/
+/nbproject
